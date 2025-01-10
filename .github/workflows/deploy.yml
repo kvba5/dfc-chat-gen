@@ -37,12 +37,6 @@ jobs:
           node-version: "20"
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: next
       - name: Restore cache
         uses: actions/cache@v4
         with:
@@ -54,7 +48,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
-        run: npm i -g pnpm && pnpm i
+        run: npm i -g pnpm && pnpm i --frozen-lockfile
       - name: Build with Next.js
         run: pnpm build
       - name: Upload artifact

@@ -31,7 +31,10 @@ const nextConfig: () => Promise<NextConfig> = () => {
   // maybe one day...
 
   // github pages build
-  if (process.env.BUILDMODE === "GHPAGES") conf.basePath = "/dfc-chat-gen"
+  if (process.env.BUILDMODE === "GHPAGES") {
+      conf.basePath = "/dfc-chat-gen"
+      conf.assetPrefix = "/dfc-chat-gen"
+  }
 
   return withExportImages(conf);
 }

@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { Button } from "../helper"
+import { Button } from "@/components/helper"
 
 export const UPPERCASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 export const LOWERCASE_LETTERS = "abcdefghijklmnopqrstuvwxyz"

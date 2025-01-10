@@ -1,6 +1,6 @@
 import { encode } from "modern-gif"
 
-const GIF_WORKER_URL = "/workers/modern-gif/worker.js"
+const GIF_WORKER_URL = "workers/modern-gif/worker.js"
 
 /** Creates Image element with source and waits for it to load */
 const loadImage = (src: string): Promise<HTMLImageElement> => {
@@ -71,8 +71,8 @@ export default class ChatGenerator {
         // Preparing
         const [bgImage, characterImage] = await Promise.all([
             // Images
-            loadImage("/img/spr_rp_localmsg_0.png"),
-            loadImage(`/img/faces/${this.character}/${this.character}_${this.face}.png`)
+            loadImage("img/spr_rp_localmsg_0.png"),
+            loadImage(`img/faces/${this.character}/${this.character}_${this.face}.png`)
         ])
 
         const canvas = document.createElement("canvas")

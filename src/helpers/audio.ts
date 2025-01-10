@@ -63,11 +63,11 @@ export class AudioManager {
     private audioMap = new Map<string, AudioInstance>();
     
     private constructor() {
-        this.loadAudio("blip", "/audio/snd_blip.wav")
-        this.loadAudio("select", "/audio/snd_select.wav")
-        this.loadAudio("equip", "/audio/snd_equip.wav")
-        this.loadAudio("save2", "/audio/snd_save2.wav")
-        this.loadAudio("mus_zzz_c", "/audio/mus_zzz_c.ogg")
+        this.loadAudio("blip", "audio/snd_blip.wav")
+        this.loadAudio("select", "audio/snd_select.wav")
+        this.loadAudio("equip", "audio/snd_equip.wav")
+        this.loadAudio("save2", "audio/snd_save2.wav")
+        this.loadAudio("mus_zzz_c", "audio/mus_zzz_c.ogg")
     }
     
     public static getInstance() {

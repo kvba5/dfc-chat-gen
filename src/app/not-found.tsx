@@ -44,7 +44,7 @@ const NobodyCameScreen = ({ level }: { level: number }) => {
     }, [])
 
     return <div ref={div} className="flex flex-col gap-10 w-screen h-screen justify-center items-center p-10 opacity-0 select-none" onDragStart={e=>e.preventDefault()}>
-        <audio controls loop><source src="/audio/mus_toomuch.ogg" type="audio/ogg" /></audio>
+        <audio controls loop><source src="audio/mus_toomuch.ogg" type="audio/ogg" /></audio>
         <div className="flex flex-col h-1/2 aspect-[4/3] border-white border-2">
             <Image alt="" src={BattleBg} className="px-3 py-2" />
             <div className="flex flex-col w-full h-1/2">

@@ -17,7 +17,7 @@ const COLORS = ["#f41515", "#15daf4", "#f4ed15", "#15f43a", "#FFFFFF"]
 
 function CharacterPreview ({ name, face, className, size = 70, onSelect }: { name: string, face: number, className?: string, size?: number, onSelect?: () => void }) {
     const audioManager = AudioManager.getInstance()
-    return <Image onMouseEnter={() => audioManager.getAudio("blip")?.play()} onClick={() => audioManager.getAudio("select")?.play() || onSelect?.()} className={"pixelated border-white hover:border-primary border-[3px] bg-[url(/img/char-bg.png)] bg-no-repeat bg-cover bg-center object-bottom " + (className ?? "")} loading="lazy" decoding="async" width={size} height={size} alt="" src={`/img/faces/${name}/${name}_${face}.png`} />
+    return <Image onMouseEnter={() => audioManager.getAudio("blip")?.play()} onClick={() => audioManager.getAudio("select")?.play() || onSelect?.()} className={`pixelated border-white hover:border-primary border-[3px] ${style["char-bg"]} bg-no-repeat bg-cover bg-center object-bottom ` + (className ?? "")} loading="lazy" decoding="async" width={size} height={size} alt="" src={`img/faces/${name}/${name}_${face}.png`} />
 }
 
 

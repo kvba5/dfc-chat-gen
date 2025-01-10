@@ -2,20 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #000;
+    --text: #fff;
+    --text-second: #aaa;
+    --primary: #ff0;
+    --primary-second: #bb0;
+    --btn: rgb(255, 166, 0);
+    --btn-second: rgb(255, 199, 94);
+  }
+
+  body {
+    @apply bg-bg text-text;
+  }
+
+  a:not([role="custom-link"]) {
+    @apply text-primary hover:text-primarysecond;
+  }
+
+  h1 {
+    @apply font-monsterfriendfore text-4xl;
+  }
+
+  button {
+    @apply text-btn border-4 border-btn w-max p-2 font-medium;
+
+    &:hover {
+      @apply text-btnsecond border-btnsecond;
+    }
+  }
+
+  input[type="color"], input[type="checkbox"] {
+    @apply bg-transparent appearance-none w-5 h-5 m-1;
+
+    &::before {
+        @apply content-[""] absolute w-5 h-5 border-4 border-bg outline-none outline-4 outline-text;
+    }
+
+    &:hover:before {
+      @apply outline-primary;
+    }
+
+    &:checked {
+      @apply bg-primary;
+
+      &::before {
+        @apply outline-primary;
+      }
+    }
+
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .pixelated {
+    image-rendering: pixelated;
+  }
 }

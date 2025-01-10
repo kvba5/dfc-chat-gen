@@ -1,0 +1,3 @@
+.arrowHover:hover {
+    filter: invert(97%) sepia(62%) saturate(5704%) hue-rotate(358deg) brightness(106%) contrast(101%);
+}

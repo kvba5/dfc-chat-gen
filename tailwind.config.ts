@@ -8,11 +8,23 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      fontFamily: {
+        monsterfriendfore: ["var(--font-monsterfriendfore)"],
+        toublebenaththedome: ["var(--font-toublebenaththedome)"]
       },
+      colors: {
+        bg: "var(--bg)",
+        text: "var(--text)",
+        textsecond: "var(--text-second)",
+        primary: "var(--primary)",
+        primarysecond: "var(--primary-second)",
+        btn: "var(--btn)",
+        btnsecond: "var(--btn-second)"
+      }
     },
+  },
+  experimental: {
+    optimizeUniversalDefaults: true
   },
   plugins: [],
 } satisfies Config;

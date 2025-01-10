@@ -1,0 +1,27 @@
+@keyframes harsoul-idle {
+    0% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 10px;
+    }
+    100% {
+        translate: 0 0;
+    }
+}
+
+@keyframes harsoul-idle2 {
+    0% {
+        filter: drop-shadow(0 0 0rem rgb(207, 37, 241));
+    }
+    50% {
+        filter: drop-shadow(0 0 0.4rem rgb(207, 37, 241));
+    }
+    100% {
+        filter: drop-shadow(0 0 0rem rgb(207, 37, 241));
+    }
+}
+
+.harsoul {
+    animation: harsoul-idle 5s linear infinite, harsoul-idle2 2s linear infinite;
+}

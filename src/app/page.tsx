@@ -1,101 +1,91 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import type { JSX } from "react";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+import style from "@/style/menu.module.css"
+
+import HarlowSoul from "#/img/spr_har_soul_0.png"
+
+import Intro from "@/components/intro";
+import { useState } from "react";
+import Footer from "@/components/menu/footer";
+import Header from "@/components/menu/header";
+import OopsieWoopsieComponent from "@/components/oopsieWoopsie";
+import UndertaleKeypad, { LOWERCASE_LETTERS, SPECIAL_CHARACTERS, UPPERCASE_LETTERS } from "@/components/menu/keypad";
+import CharacterPicker, { DEFAULT_CHARACTER } from "@/components/menu/characterPicker";
+import PreviewComponent from "@/components/menu/preview";
+import Image from "next-export-optimize-images/image";
+
+
+enum MenuStages {
+  NAME_PICKER,
+  MESSAGE_WRITER,
+  CHARACTER_PICKER,
+  PREVIEW
+}
+
+function Menu() {
+  const [currentStage, setMenuStage] = useState<MenuStages>(MenuStages.NAME_PICKER)
+
+   
+  const [playerName, setPlayerName] = useState("???")
+  const [message, setMessage] = useState("If you see this message - I broke something lol")
+  const [character, setCharacter] = useState(DEFAULT_CHARACTER)
+  const [face, setFace] = useState(0)
+
+  let stageElement: () => JSX.Element;
+  switch(currentStage) {
+      case MenuStages.NAME_PICKER:
+        stageElement = () => <UndertaleKeypad
+          title="Name fallen player"
+          characterLimit={16}
+          onDone={(name) => {
+            setPlayerName(name)
+            setMenuStage(MenuStages.MESSAGE_WRITER)
+          }}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+        break;
+
+      case MenuStages.MESSAGE_WRITER:
+        stageElement = () => <UndertaleKeypad
+          title="Enter the message"
+          characters={[UPPERCASE_LETTERS, LOWERCASE_LETTERS, `${SPECIAL_CHARACTERS}?!@$%^&*():;"'{}[]|<>/+= .,`]}
+          onDone={(msg) => {
+            setMessage(msg)
+            setMenuStage(MenuStages.CHARACTER_PICKER)
+          }}
+          onBack={() => setMenuStage(MenuStages.NAME_PICKER)}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        break;
+
+      case MenuStages.CHARACTER_PICKER:
+        stageElement = () => <CharacterPicker onSelect={(character, face) => {
+          setCharacter(character)
+          setFace(face)
+          setMenuStage(MenuStages.PREVIEW)
+        }} />
+        break;
+
+      case MenuStages.PREVIEW:
+        stageElement = () => <PreviewComponent {...{ playerName, message, character, face }} />
+        break;
+
+      default:
+        stageElement = () => <OopsieWoopsieComponent error={`Menu Stage with ID #${currentStage} doesn't exist...`} />
+  }
+
+
+  return <div className="text-center flex flex-col h-full">
+    <Header />
+    <Image src={HarlowSoul} alt="" height={300} className={`${style["harsoul"]} pixelated absolute right-24 max-[900px]:hidden`} />
+    <div className="flex-grow">
+      {stageElement()}
     </div>
-  );
+    <Footer />
+  </div>
+}
+
+export default function Page() {
+  const [shouldShowIntro, enableIntro] = useState(true)
+  return shouldShowIntro ? <Intro enableIntro={enableIntro} /> : <Menu />
 }

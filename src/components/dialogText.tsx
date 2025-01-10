@@ -68,7 +68,6 @@ export default function useDialog(text: string, s?: Partial<Settings>): [
 
     const startDialog = useCallback((): [Promise<unknown>, () => boolean] => {
         if(isDialogRunning) return [Promise.resolve(), () => false]
-        console.log("started")
         setIsDialogRunning(true)
 
         const instanceSettings = settings;

@@ -137,7 +137,6 @@ function UnexpectedGuestScreen() {
             if (dialogRunning) return;
             if (currentDialog + 1 === dialog.length) return setDialogFinished(true);
     
-            console.log(dialog[currentDialog + 1])
             setDialog(currentDialog + 1)
         }
 

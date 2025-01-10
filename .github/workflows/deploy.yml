@@ -50,7 +50,7 @@ jobs:
       - name: Install dependencies
         run: npm i -g pnpm && pnpm i --frozen-lockfile
       - name: Build with Next.js
-        run: pnpm build
+        run: BUILDMODE=GHPAGES pnpm build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

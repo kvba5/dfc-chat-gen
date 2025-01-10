@@ -75,9 +75,9 @@ function Menu() {
   }
 
 
-  return <div className="text-center flex flex-col h-full">
+  return <div className="text-center flex flex-col h-screen">
+    <Image src={HarlowSoul} alt="" height={300} className={`${style["harsoul"]} pixelated absolute top-0 right-24 max-[900px]:hidden`} />
     <Header />
-    <Image src={HarlowSoul} alt="" height={300} className={`${style["harsoul"]} pixelated absolute right-24 max-[900px]:hidden`} />
     <div className="flex-grow">
       {stageElement()}
     </div>

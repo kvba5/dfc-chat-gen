@@ -33,6 +33,7 @@ const nextConfig: () => Promise<NextConfig> = () => {
   // github pages build
   if (process.env.BUILDMODE === "GHPAGES") {
       conf.basePath = "/dfc-chat-gen"
+      conf.assetPrefix = "/dfc-chat-gen"
       conf.trailingSlash = true
   }
 
